@@ -5,3 +5,5 @@ Possible use-cases include:
 - Backend for LLM Agents / Discord Bots
 - Backend for IOT products
 - Backend for Search App in low bandwith environments (Countryside, Desert, Deutsche Bahn...)
+
+![img.png](graphql.png)
