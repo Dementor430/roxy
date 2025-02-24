@@ -1,28 +1,29 @@
 use async_graphql::{InputObject, SimpleObject};
+use serde::{Deserialize, Serialize};
 
-#[derive(InputObject)]
+#[derive(Debug, InputObject, SimpleObject, Serialize, Deserialize)]
 pub struct SearchRequest {
-    pub(crate) query: String,
-    pub(crate) engines: Vec<String>,
+    pub query: String,
+    pub engines: Vec<String>,
 }
 
-#[derive(SimpleObject)]
-pub struct SearchResult {
-    pub(crate) title: String,
-    pub(crate) link: String,
-    pub(crate) description: String,
-}
-
-#[derive(SimpleObject)]
-pub struct EngineResult {
-    pub(crate) engine: String,
-    pub(crate) results: Vec<SearchResult>,
-    pub(crate) count: i32,
-}
-
-#[derive(SimpleObject)]
+#[derive(Debug, SimpleObject, Serialize, Deserialize)]
 pub struct SearchResponse {
-    pub(crate) query: String,
-    pub(crate) timestamp: String,
-    pub(crate) results: Vec<EngineResult>,
+    pub query: String,
+    pub timestamp: String,
+    pub results: Vec<EngineResult>,
+}
+
+#[derive(Debug, SimpleObject, Serialize, Deserialize)]
+pub struct EngineResult {
+    pub engine: String,
+    pub count: i32,
+    pub results: Vec<SearchResult>,
+}
+
+#[derive(Debug, SimpleObject, Serialize, Deserialize, Clone)]
+pub struct SearchResult {
+    pub title: String,
+    pub link: String,
+    pub description: String,
 }
