@@ -1,4 +1,6 @@
 extern crate rocket;
+
+use std::time::Duration;
 use crate::models::search::{EngineResult, SearchResult};
 use anyhow::anyhow;
 use async_graphql::Result;
@@ -21,9 +23,10 @@ pub struct DuckDuckGoEngine;
 impl SearchEngine for DuckDuckGoEngine {
     async fn search(&self, query: &str) -> Result<EngineResult, anyhow::Error> {
         let client = reqwest::Client::builder()
-            .pool_idle_timeout(std::time::Duration::from_secs(120))
+            .pool_idle_timeout(Duration::from_secs(120))
             .pool_max_idle_per_host(20)
             .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+            .http2_keep_alive_interval(Duration::from_secs(15))
             .build()
             .unwrap();
 
