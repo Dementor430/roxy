@@ -1,5 +1,6 @@
 mod duckduckgo;
 mod wikimedia;
+mod yacy;
 
 use crate::models::search::EngineResult;
 use async_trait::async_trait;
@@ -18,6 +19,7 @@ static ENGINES: Lazy<HashMap<&'static str, &'static dyn SearchEngine>> = Lazy::n
         &wikimedia::WikimediaEngine as &dyn SearchEngine,
     );
     engines.insert("duckduckgo", &duckduckgo::DuckDuckGoEngine);
+    engines.insert("yacy", &yacy::YacyEngine);
     engines
 });
 
